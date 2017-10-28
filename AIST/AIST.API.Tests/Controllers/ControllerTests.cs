@@ -15,6 +15,7 @@ namespace AIST.API.SystemTests.Controllers
         private DbContextOptionsBuilder<DataAccessDbContext> optionsBuilder;
         private DataAccessDbContext context;
         private AISTRepository _testAistRepository;
+        private string connectionString = "Server=??;Database=AISTDB;User Id=??; Password=??;Trusted_Connection=True;MultipleActiveResultSets=true";
 
         //SEE: https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/testing
 
@@ -25,7 +26,7 @@ namespace AIST.API.SystemTests.Controllers
             _controller = new AISTController();
 
             optionsBuilder = new DbContextOptionsBuilder<DataAccessDbContext>();
-            optionsBuilder.UseSqlServer("Server=franciscotw7x17;Database=AISTDB;User Id=dev; Password=usg;Trusted_Connection=True;MultipleActiveResultSets=true");
+            optionsBuilder.UseSqlServer(connectionString);
 
             context = new DataAccessDbContext(optionsBuilder.Options);
             _testAistRepository = new AISTRepository(context);

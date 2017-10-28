@@ -12,11 +12,12 @@ namespace AIST.API.Controllers
     {
         private DbContextOptionsBuilder<DataAccessDbContext> optionsBuilder;
         private readonly AISTRepository _aistRepository;
+        private string connectionString = "Server=??;Database=AISTDB;User Id=??; Password=??;Trusted_Connection=True;MultipleActiveResultSets=true";
 
         public AISTController()
         {
             optionsBuilder = new DbContextOptionsBuilder<DataAccessDbContext>();
-            optionsBuilder.UseSqlServer("Server=franciscotw7x17;Database=AISTDB;User Id=dev; Password=usg;Trusted_Connection=True;MultipleActiveResultSets=true");
+            optionsBuilder.UseSqlServer(connectionString);
             _aistRepository = new AISTRepository(new DataAccessDbContext(optionsBuilder.Options));
         }
         

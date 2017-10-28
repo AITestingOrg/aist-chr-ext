@@ -13,13 +13,14 @@ namespace AIST.DataAccess.Tests
     {
         private DbContextOptionsBuilder<DataAccessDbContext> optionsBuilder;
         private AISTRepository _testAistRepository;
+        private string connectionString = "Server=??;Database=AISTDB;User Id=??; Password=??;Trusted_Connection=True;MultipleActiveResultSets=true";
 
         [TestInitialize]
         public void FixtureSetup()
         {
             //Created DB shell - For testing
             optionsBuilder = new DbContextOptionsBuilder<DataAccessDbContext>();
-            optionsBuilder.UseSqlServer("Server=franciscotw7x17;Database=AISTDB;User Id=dev; Password=usg;Trusted_Connection=True;MultipleActiveResultSets=true");
+            optionsBuilder.UseSqlServer(connectionString);
 
             _testAistRepository = new AISTRepository(new DataAccessDbContext(optionsBuilder.Options));                            
         }
