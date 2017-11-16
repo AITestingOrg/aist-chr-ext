@@ -21,6 +21,16 @@ namespace AIST.DataAccess.Repository
             _context.SaveChanges();
         }
 
+        public void AddIfDoeNotExist(PagesData entity)
+        {
+            var exist = _context.PagesData.Where(a => a.HtmlString == entity.HtmlString).FirstOrDefault();
+            if(exist == null)
+            {
+                _context.PagesData.Add(entity);
+                _context.SaveChanges();
+            }            
+        }
+
         public void AddRange(IEnumerable<PagesData> entity)
         {
             _context.PagesData.AddRange(entity);

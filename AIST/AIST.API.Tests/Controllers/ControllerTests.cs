@@ -15,7 +15,7 @@ namespace AIST.API.SystemTests.Controllers
         private DbContextOptionsBuilder<DataAccessDbContext> optionsBuilder;
         private DataAccessDbContext context;
         private AISTRepository _testAistRepository;
-        private string connectionString = "Server=??;Database=AISTDB;User Id=??; Password=??;Trusted_Connection=True;MultipleActiveResultSets=true";
+        private string connectionString = "Server=???;Database=AISTDB_TEST;User Id=???; Password=???;Trusted_Connection=True;MultipleActiveResultSets=true";
 
         //SEE: https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/testing
 
@@ -23,12 +23,11 @@ namespace AIST.API.SystemTests.Controllers
         public void FixtureSetup()
         {
             // Arrange
-            _controller = new AISTController();
-
-            optionsBuilder = new DbContextOptionsBuilder<DataAccessDbContext>();
+                        optionsBuilder = new DbContextOptionsBuilder<DataAccessDbContext>();
             optionsBuilder.UseSqlServer(connectionString);
 
             context = new DataAccessDbContext(optionsBuilder.Options);
+            _controller = new AISTController(context);
             _testAistRepository = new AISTRepository(context);
 
             context.Database.ExecuteSqlCommand("Delete PagesData");
