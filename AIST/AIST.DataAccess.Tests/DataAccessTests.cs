@@ -13,7 +13,7 @@ namespace AIST.DataAccess.Tests
     {
         private DbContextOptionsBuilder<DataAccessDbContext> optionsBuilder;
         private AISTRepository _testAistRepository;
-        private string connectionString = "Server=??;Database=AISTDB;User Id=??; Password=??;Trusted_Connection=True;MultipleActiveResultSets=true";
+        private string connectionString = "Server=???;Database=AISTDB_TEST;User Id=???; Password=???;Trusted_Connection=True;MultipleActiveResultSets=true";
 
         [TestInitialize]
         public void FixtureSetup()
@@ -31,16 +31,6 @@ namespace AIST.DataAccess.Tests
             //_dbcontext.Database.Delete();
             //_dbcontext.Database.ExecuteSqlCommand("Delete PagesDatas");
         }
-
-        //[TestMethod, Ignore]
-        //public void CreateEmptyDatabaseAndTables()
-        //{
-        //    using (var context = new DataAccessDbContext(optionsBuilder.Options))
-        //    {
-        //        context.Database.Create();
-        //    }
-        //    Console.WriteLine("Database created with empty tables.");
-        //}
 
         [TestMethod]
         public void InsertRangeData()

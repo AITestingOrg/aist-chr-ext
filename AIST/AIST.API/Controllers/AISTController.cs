@@ -10,30 +10,26 @@ namespace AIST.API.Controllers
     [Route("api/[controller]")]
     public class AISTController : Controller
     {
-        private DbContextOptionsBuilder<DataAccessDbContext> optionsBuilder;
         private readonly AISTRepository _aistRepository;
-        private string connectionString = "Server=??;Database=AISTDB;User Id=??; Password=??;Trusted_Connection=True;MultipleActiveResultSets=true";
-
-        public AISTController()
+    
+        public AISTController(DataAccessDbContext context)
         {
-            optionsBuilder = new DbContextOptionsBuilder<DataAccessDbContext>();
-            optionsBuilder.UseSqlServer(connectionString);
-            _aistRepository = new AISTRepository(new DataAccessDbContext(optionsBuilder.Options));
+            _aistRepository = new AISTRepository(context);            
         }
-        
-        //http://localhost:62057/api/aist/getrecords
+
+        //http://localhost:63762/API/AIST
         [HttpGet]
         public List<PagesData> Get()
         {
             return (List<PagesData>)_aistRepository.Get();
         }
 
-        //http://localhost:62057/api/aist/addrecord
-        //{"Id":10, "Url":"TEST", "HtmlString":"HTML", "PageType": "TEST1"}
+        //http://localhost:63762/API/AIST?Url=http://www.ultimatesoftware.com&HtmlString=html&PageType=login
         [HttpPut]
+        [RequestSizeLimit(valueCountLimit: 2147483647)] // e.g. 2 GB request limit
         public void Put(PagesData page)
         {
-            _aistRepository.Add(page);
+            _aistRepository.AddIfDoeNotExist(page);
         }
     }
 }
